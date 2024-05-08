@@ -1,0 +1,41 @@
+spring:
+    main:
+        allow-bean-definition-overriding: true
+    datasource:
+        url: jdbc:postgresql://${DB_HOST}:${DB_PORT}/${DB_NAME}
+        driverClassName: org.postgresql.Driver
+        username: ${DB_USER}
+        password: ${DB_PASSWORD}
+    jpa:
+      hibernate:
+        ddl-auto: update
+    data:
+      redis:
+        host: ${REDIS_HOST}
+        port: ${REDIS_PORT}
+
+logging:
+  level:
+    com:
+      example:
+        accounts: DEBUG
+grpc:
+  client:
+    grpcClient:
+      address: ${CONVERTER_URL}
+      enableKeepAlive: true
+      keepAliveWithoutCalls: true
+      negotiation-type: plaintext
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      converterBreaker:
+        minimum-number-of-calls: 10
+        automatic-transition-from-open-to-half-open-enabled: true
+        permitted-number-of-calls-in-half-open-state: 3
+        failure-rate-threshold: 50
+        wait-duration-in-open-state: 10
+
+kafka:
+  fee: ${KAFKA_TOPIC}
