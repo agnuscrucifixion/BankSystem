@@ -1,4 +1,4 @@
-/*
+package org.example.generated;/*
 package org.example.generated;
 
 import static io.grpc.MethodDescriptor.generateFullMethodName;
